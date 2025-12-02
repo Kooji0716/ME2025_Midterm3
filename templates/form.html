@@ -5,48 +5,53 @@
     <!-- 客戶名稱 -->
     <div class="form-row">
         <label for="customer">客戶名稱：</label>
-        <input type="text" id="customer" name="customer" required>
+        <!-- name 要叫 customer_name -->
+        <input type="text" id="customer" name="customer_name" required>
     </div>
 
     <!-- 備註 -->
     <div class="form-row">
         <label for="note">備註：</label>
-        <input type="text" id="note" name="note">
+        <!-- name 要叫 product_note -->
+        <input type="text" id="note" name="product_note">
     </div>
 
-    <!-- 日期：預設今天（由 JS 幫你填） -->
+    <!-- 日期：預設今天 -->
     <div class="form-row">
         <label for="date">日期：</label>
-        <input type="date" id="date" name="date" required>
+        <!-- name 要叫 product_date -->
+        <input type="date" id="date" name="product_date" required>
     </div>
 
-    <!-- 商品種類 (Category) -->
+    <!-- 商品種類 (Category)：用來查商品清單 -->
     <div class="form-row">
         <label for="category">商品種類：</label>
         <select id="category" name="category" onchange="selectCategory()" required>
-            <!-- 選項可由後端 render，或先寫死幾個 -->
             <option value="">請選擇商品種類</option>
             <option value="飲料">飲料</option>
+            <option value="主食">主食</option>
             <option value="點心">點心</option>
-            <option value="其他">其他</option>
+            <option value="輕食">輕食</option>
         </select>
     </div>
 
     <!-- 商品名稱：會依種類由 JS 更新 -->
     <div class="form-row">
         <label for="product">商品名稱：</label>
-        <select id="product" name="product" onchange="selectProduct()" required>
+        <!-- name 要叫 product_name -->
+        <select id="product" name="product_name" onchange="selectProduct()" required>
             <option value="">請先選擇商品種類</option>
         </select>
     </div>
 
-    <!-- 數量：必須 > 0，預設 1（可以用 JS 或這裡 value="1"） -->
+    <!-- 數量：必須 > 0，預設 1 -->
     <div class="form-row">
         <label for="quantity">數量：</label>
+        <!-- name 要叫 product_amount -->
         <input
             type="number"
             id="quantity"
-            name="quantity"
+            name="product_amount"
             min="1"
             value="1"
             required
@@ -57,6 +62,7 @@
     <!-- 單價：由 selectProduct() 透過 Fetch API 更新 -->
     <div class="form-row">
         <label for="price">單價：</label>
+        <!-- 單價後端不一定要存，用不到就無所謂 name 叫什麼 -->
         <input
             type="number"
             id="price"
@@ -69,7 +75,8 @@
     <!-- 狀態：下拉選單，預設「未付款」 -->
     <div class="form-row">
         <label for="status">狀態：</label>
-        <select id="status" name="status">
+        <!-- name 要叫 product_status -->
+        <select id="status" name="product_status">
             <option value="未付款" selected>未付款</option>
             <option value="已付款">已付款</option>
             <option value="已完成">已完成</option>
@@ -79,15 +86,16 @@
     <!-- 小計：單價 × 數量，自動計算 -->
     <div class="form-row">
         <label for="total">小計：</label>
+        <!-- name 要叫 product_total -->
         <input
             type="number"
             id="total"
-            name="total"
+            name="product_total"
             readonly
         >
     </div>
 
-    <!-- 送出按鈕：可以用原生 submit 或之後改成 JS fetch -->
+    <!-- 送出按鈕 -->
     <div class="form-row">
         <button type="submit">送出</button>
     </div>

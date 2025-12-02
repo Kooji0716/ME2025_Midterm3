@@ -86,13 +86,59 @@ function delete_data(value) {
     }
 
 // 2. 選取商品後的價格更新邏輯 (Fetch API)
-        function selectProduct() {
-        // TODO: Fetch price by product name
+    async function selectProduct() {
+        const productSelect = document.getElementById("product");
+        const priceInput    = document.getElementById("price");
+
+        if (!productSelect || !priceInput) return;
+
+        const productName = productSelect.value;
+
+        if (!productName) {
+            priceInput.value = "";
+            countTotal();
+            return;
+        }
+
+        try {
+            const res = await fetch(`/product?product=${encodeURIComponent(productName)}`);
+            if (!res.ok) {
+                throw new Error("取得商品價格失敗");
+            }
+
+            const data = await res.json();
+            const price = (typeof data.price !== "undefined") ? data.price : 0;
+
+            priceInput.value = price;
+            countTotal(); // 單價變了就重算小計
+        } catch (err) {
+            console.error(err);
+            alert("取得商品價格時發生錯誤");
+        }
     }
 
 // 3. 計算小計邏輯
         function countTotal() {
-        // TODO: Calculate total price
+        const priceInput = document.getElementById("price");
+        const qtyInput   = document.getElementById("quantity");
+        const totalInput = document.getElementById("total");
+
+        if (!priceInput || !qtyInput || !totalInput) return;
+
+        const price = Number(priceInput.value) || 0;
+        const qty   = Number(qtyInput.value) || 0;
+
+        totalInput.value = price * qty;
     }
 
 // 其他輔助函式 (如重置欄位等) 可自由實作
+window.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.getElementById("date");
+    if (dateInput && !dateInput.value) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+    }
+});

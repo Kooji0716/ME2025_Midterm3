@@ -15,11 +15,12 @@ class Database():
         return f"OD{timestamp}{random_num}"
 
     def get_product_names_by_category(self, cur, category):
-
+        pass
     def get_product_price(self, cur, product):
-
+        pass
     def add_order(self, cur, order_data):
-
+        pass
     def get_all_orders(self, cur):
-
+        pass
     def delete_order(self, cur, order_id):
+        pass
