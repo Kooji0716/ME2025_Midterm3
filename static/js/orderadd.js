@@ -26,3 +26,20 @@ function delete_data(value) {
         console.error("發生錯誤：", error);
     });
 }
+
+// 1. 選取商品種類後的連動邏輯 (Fetch API)
+        function selectCategory() {
+        // TODO: Fetch product list by category
+    }
+
+    // 2. 選取商品後的價格更新邏輯 (Fetch API)
+        function selectProduct() {
+        // TODO: Fetch price by product name
+    }
+
+    // 3. 計算小計邏輯
+        function countTotal() {
+        // TODO: Calculate total price
+    }
+
+    // 其他輔助函式 (如重置欄位等) 可自由實作
